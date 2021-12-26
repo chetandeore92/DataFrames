@@ -15,11 +15,11 @@ object GroupedAggregate {
       .config(conf)
       .getOrCreate()
 
-    val checkHeader: Boolean = true
+    val checkHeaderTrue: Boolean = true
 
     val invoiceDf = spark.read
       .format("csv")
-      .option("header",checkHeader)
+      .option("header",checkHeaderTrue)
       .option("path","/Users/chetandeore/Documents/Study/BigData/Week12-Apache Spark - Structured API Part-2/order_data-201025-223502.csv")
       .load()
 
