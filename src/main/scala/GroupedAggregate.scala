@@ -20,7 +20,7 @@ object GroupedAggregate {
     val invoiceDf = spark.read
       .format("csv")
       .option("header",checkHeaderTrue)
-      .option("path","/Users/chetandeore/Documents/Study/BigData/Week12-Apache Spark - Structured API Part-2/order_data-201025-223502.csv")
+      .option("path","git /order_data-201025-223502.csv")
       .load()
 
     val summaryDf = invoiceDf.groupBy("Country","InvoiceNo")
