@@ -43,3 +43,6 @@ bin/
 
 #general
 *.class
+/metastore_db/
+/spark-warehouse/
+/.idea/
