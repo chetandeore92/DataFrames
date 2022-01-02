@@ -1,16 +1,16 @@
 import org.apache.spark.SparkConf
+import org.apache.spark.sql.functions.expr
 import org.apache.spark.sql.{Column, SparkSession}
 
-object SimpleJoin_ShuffleSortMergeJoin {
+object DealWithNulls {
+
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf()
 
     sparkConf.set("spark.master","local[*]")
-    sparkConf.set("spark.app.name","register Udf")
+    sparkConf.set("spark.app.name","AmbiguousError")
 
-    val spark = SparkSession.builder()
-      .config(sparkConf)
-      .getOrCreate()
+    val spark = SparkSession.builder().config(sparkConf).getOrCreate()
 
     val ordersDf = spark.read
       .format("csv")
@@ -28,17 +28,17 @@ object SimpleJoin_ShuffleSortMergeJoin {
 
     //customersDF.show()
 
-    val joinCondition : Column = customersDF.col("customer_id") === ordersDf.col("order_customer_id")
+    val joinCondition: Column = ordersDf.col("customer_id") === customersDF.col("customer_id")
 
-    val joinType = "inner" //=> outer,left,right
+    val joinType = "outer"
 
-    val joinedDf = ordersDf.join(customersDF,joinCondition,joinType).sort("order_customer_id")
+    //coalesce is to replace nulls with different value
+    val joinedData = ordersDf.join(customersDF,joinCondition,joinType)
+      .withColumn("order_id",expr("coalesce(order_id,-1)"))
+      .sort("order_id")
+      .show()
 
-    joinedDf.write
-      .format("csv")
-      //.mode(SaveMode.Append)
-      .option("path","/Users/chetandeore/Desktop/new")
-      .save()
+
 
     spark.stop()
 
