@@ -59,7 +59,7 @@ object SparkSqlGroupByPractical {
         |first(INT(date_format(date,'M'))) m,
         |count(1) as count from biglog
         |group by month, level
-        |order by m""").drop("m").show(60)
+        |order by m""").drop("m").show(40)
 
     //monthExtracted.createOrReplaceTempView()
 
