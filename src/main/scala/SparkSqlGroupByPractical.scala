@@ -55,11 +55,11 @@ object SparkSqlGroupByPractical {
 
     val monthExtracted = spark.sql(
       """select date_format(date,'MMMM') as month,
-        |level,
-        |first(INT(date_format(date,'M'))) m,
-        |count(1) as count from biglog
-        |group by month, level
-        |order by m""").drop("m").show(40)
+       level,
+       first(INT(date_format(date,'M'))) m,
+        count(1) as count from biglog
+        group by month, level
+        order by m""").drop("m").show(40)
 
     //monthExtracted.createOrReplaceTempView()
 
