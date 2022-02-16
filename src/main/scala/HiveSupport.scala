@@ -8,6 +8,7 @@ object HiveSupport {
     val sparkConf = new SparkConf()
     sparkConf.set("spark.master","local[*]")
     sparkConf.set("spark.app.name","HiveSupport for metastore")
+    sparkConf.set("spark.sql.warehouse.dir","/Users/chetandeore/Documents/Study/warehouse")
 
 
     //enable hive support to use hive metastore instead of in-memory metastore
@@ -17,6 +18,7 @@ object HiveSupport {
       .enableHiveSupport()
       .getOrCreate()
 
+    ///spark.conf.get("spark.sql.warehouse.dir")
 
     val ordersdDf = spark.read
       .format("csv")
@@ -24,6 +26,8 @@ object HiveSupport {
       .option("header","true")
       .option("inferSchema",true)
       .load
+
+    //val s = ordersdDf.foreach(x => println)
 
     spark.sql("create database if not exists retail")
 

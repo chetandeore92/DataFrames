@@ -30,6 +30,7 @@ object SparkSql {
 
     spark.sql("select order_customer_id, count(*) as orders_count from  orders where order_status = 'CLOSED' group by order_customer_id order by orders_count desc").show()
 
+
     spark.stop()
   }
 }
