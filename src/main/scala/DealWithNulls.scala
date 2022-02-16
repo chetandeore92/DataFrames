@@ -1,5 +1,4 @@
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.functions.expr
 import org.apache.spark.sql.{Column, SparkSession}
 
 object DealWithNulls {
@@ -33,8 +32,8 @@ object DealWithNulls {
     val joinType = "outer"
 
     //coalesce is to replace nulls with different value
-    val joinedData = ordersDf.join(customersDF,joinCondition,joinType)
-      .withColumn("order_id",expr("coalesce(order_id,-1)"))
+    val joinedData = ordersDf.join(customersDF,joinCondition,joinType).na.fill(Map("order_id"->"-1","order_date"->"NoDate"))
+      //.withColumn("order_id",expr("coalesce(order_id,-1)"))
       .sort("order_id")
       .show()
 
