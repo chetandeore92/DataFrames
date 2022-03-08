@@ -30,20 +30,20 @@ object UDFSpark {
 
     //this is must, so that driver will serialize this func and will send it to all executors
     //column object expression UDF
-/*
-    val parseAge = udf(checkAge(_:Int):String)
-*/
+    /*
+        val parseAge = udf(checkAge(_:Int):String)
+    */
 
     //column object expression UDF
-/*
-    val df2 = df1.withColumn("adult",parseAge(col("age")))
-*/
+    /*
+        val df2 = df1.withColumn("adult",parseAge(col("age")))
+    */
 
 
 
     // SQL/String expression UDF -> Registering UDF
 
-   // spark.udf.register("parseAge",checkAge(_:Int):String)
+    // spark.udf.register("parseAge",checkAge(_:Int):String)
 
 
     spark.udf.register("parseAge",(x:Int)=>{if(x > 18) "Y" else "N"})
