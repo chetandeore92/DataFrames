@@ -20,6 +20,8 @@ class ScalaTest  {
 
     val actual = TestClass.getTheFileCount(spark)
 
+    println(actual)
+    println(expected)
     assert(actual == expected)
     spark.stop()
 

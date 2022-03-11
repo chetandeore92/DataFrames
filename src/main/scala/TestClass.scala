@@ -35,12 +35,12 @@ object TestClass {
   def getTheFile(spark: SparkSession): Dataset[Row] ={
     val inputFile = spark.read
       .format("csv")
-     // .option("path", "/Users/chetandeore/Documents/Study/BigData/Week12-Apache\\ Spark\\ -\\ Structured\\ API\\ Part-2/orders-201025-223502.csv")
-    .option("path", "/Users/chetandeore/Documents/Study/BigData/Week12-Apache\\ Spark\\ -\\ Structured\\ API\\ Part-2/ds.csv")
+     .option("path", "/Users/chetandeore/Documents/Study/BigData/Week12-Apache\\ Spark\\ -\\ Structured\\ API\\ Part-2/orders-201025-223502.csv")
+    //.option("path", "/Users/chetandeore/Documents/Study/BigData/Week12-Apache\\ Spark\\ -\\ Structured\\ API\\ Part-2/ds.csv")
       //.schema(orderSchema)
       //.schema("order_id String,order_date Int,order_customer_id String,order_status String")
       .option("inferSchema", true)
-       .option("header", true)
+      // .option("header", true)
       .option("mode","DROPMALFORMED")
       .load()
 
@@ -72,7 +72,7 @@ object TestClass {
 
     val inputFile = getTheFile(spark)
   // inputFile.show()
-   val count = inputFile
+   val count = inputFile.count()
 
     count
 
