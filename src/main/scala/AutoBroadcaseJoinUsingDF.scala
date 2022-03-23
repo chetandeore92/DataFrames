@@ -1,5 +1,4 @@
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.functions.broadcast
 
 object AutoBroadcaseJoinUsingDF {
 
@@ -19,9 +18,10 @@ object AutoBroadcaseJoinUsingDF {
       .option("header",true)
       .load()
 
-    orderDf.join(broadcast(customerDf),customerDf("customer_id") === orderDf("order_customer_id")).show()
+  //  orderDf.join(broadcast(customerDf),customerDf("customer_id") === orderDf("order_customer_id")).show()
 
-    //scala.io.StdIn.readLine()
+    orderDf.join(customerDf,customerDf("customer_id") === orderDf("order_customer_id")).show()
+   // scala.io.StdIn.readLine()
 
     spark.stop()
 
