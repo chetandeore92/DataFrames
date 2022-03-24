@@ -6,7 +6,7 @@ object ShuffleSortMergeJoin {
 
     val sparkConf = new SparkConf().setAppName("ShuffleSortMergeJoin").setMaster("local[*]")
 
-    val spark = GetSparkInstance.get(sparkConf)
+    val spark = SparkInstance.get(sparkConf)
 
     val orderDf = spark.read.format("csv")
       .option("path","/Users/chetandeore/Documents/Study/BigData/Spark/23082020/orders.csv")

@@ -4,7 +4,7 @@ object AutoBroadcaseJoinUsingDF {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setMaster("local[*]").setAppName("AutoBroadcaseJoinUsingDF")
-    val spark = GetSparkInstance.get(sparkConf)
+    val spark = SparkInstance.get(sparkConf)
 
     val orderDf = spark.read.format("csv")
       .option("path","/Users/chetandeore/Documents/Study/BigData/Spark/23082020/orders.csv")
