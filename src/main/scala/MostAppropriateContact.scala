@@ -37,7 +37,6 @@ object  MostAppropriateContact {
     contactDataWithRowNum.show(false)
 
     //def getMostAppropriateName()
-
     spark.stop()
   }
 }
